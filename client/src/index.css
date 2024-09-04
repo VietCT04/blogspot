@@ -18,4 +18,23 @@
 }
 .App {
   background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 50vh;
+  border-radius: 20px; /* This makes the corners rounded */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.App .LoginForm {
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+}
+.App .LoginForm h2, form, p{
+  margin: 25% 20% 20% 20%;
+
 }
