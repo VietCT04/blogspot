@@ -9,20 +9,23 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const data = {username, password};
     try {
-      const response = await axios.post('http://localhost:3000/login', {
-        username,
-        password
+      const response = await fetch('http://localhost:3000/register',  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
-
-      setMessage(response.data);
-    } catch (error) {
-      if (error.response) {
-        setMessage(error.response.data);
+      const result = await response.json();
+      if (response.ok){
+        alert(`User ${result.username} registered successfully!`);
       } else {
-        setMessage('An error occurred.');
+        alert('Failed to register user');
       }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 

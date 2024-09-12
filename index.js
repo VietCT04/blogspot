@@ -43,6 +43,21 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.post('/register', async (req, res) => {
+  const {username, password} = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const result = await pool.query(
+      'INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING *',
+      [username, hashedPassword]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error saving user data");
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
